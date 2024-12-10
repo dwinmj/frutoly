@@ -1,0 +1,694 @@
+{
+    "upper-extremities": {
+        "order": 0,
+        "title": "Hand &amp; Upper Extremities",
+        "image": "\/wp-content\/uploads\/2023\/04\/AccordionImg_Hand-Upper@2x.png",
+        "img_alt": "a circle targeting the hand",
+        "desc": "Treatments from shoulders to fingertips",
+        "data": [
+            {
+                "term_id": 17,
+                "question": {
+                    "post_id": 12377,
+                    "question": "Proin vestibulum dolor arcu, sit amet porta erat mollis",
+                    "answer": "<p>Nunc sit amet eleifend justo, eget vehicula quam. In faucibus pharetra tristique. Nullam pulvinar, mi quis vulputate sollicitudin, tellus nunc<\/p>\n",
+                    "doctor": 319,
+                    "category": {
+                        "term_id": 17,
+                        "name": "Upper Extremities",
+                        "slug": "upper-extremities",
+                        "term_group": 0,
+                        "term_taxonomy_id": 17,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 319,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Lenart_Brett.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/brett-a-lenart-m-d\/lenart_brett-2\/",
+                    "first_name": "Brett",
+                    "middle_name": "A.",
+                    "last_name": "Lenart",
+                    "suffix": "M.D.",
+                    "actual_id": 319
+                }
+            },
+            {
+                "term_id": 17,
+                "question": {
+                    "post_id": 12375,
+                    "question": "Etiam vulputate dolor fermentum urna vulputate",
+                    "answer": "<p>Morbi fermentum at erat vitae ornare. Mauris sollicitudin vulputate semper. Nulla facilisi. Etiam vulputate dolor fermentum urna vulputate, at lacinia quam pellentesque. Ut quis feugiat felis. Vestibulum mollis, libero blandit tempor condimentum, dui lorem consectetur nunc, ut commodo justo augue condimentum sapien<\/p>\n",
+                    "doctor": 540,
+                    "category": {
+                        "term_id": 17,
+                        "name": "Upper Extremities",
+                        "slug": "upper-extremities",
+                        "term_group": 0,
+                        "term_taxonomy_id": 17,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 540,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Zaret_David.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/david-i-zaret-m-d\/zaret_david-2\/",
+                    "first_name": "David",
+                    "middle_name": "I.",
+                    "last_name": "Zaret",
+                    "suffix": "M.D., M.B.A.",
+                    "actual_id": 540
+                }
+            },
+            {
+                "term_id": 17,
+                "question": {
+                    "post_id": 12373,
+                    "question": "Lorem ipsum dolor sit amet, consectetur ad",
+                    "answer": "<p>dipiscing elit. Duis fringilla vitae eros sed varius. In eu nisl turpis. Nam porttitor, erat id dapibus mollis, eros odio consectetur sapien, ac lobortis nibh ante ac tellus. Morbi fermentum at erat vitae ornare. Mauris sollicitudin vulputate semper. Nulla facilisi. Etiam vulputate dolor fe<\/p>\n",
+                    "doctor": 388,
+                    "category": {
+                        "term_id": 17,
+                        "name": "Upper Extremities",
+                        "slug": "upper-extremities",
+                        "term_group": 0,
+                        "term_taxonomy_id": 17,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 388,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Lieberman_Gregory.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/gregory-lieberman\/lieberman_gregory-2\/",
+                    "first_name": "Gregory",
+                    "middle_name": "",
+                    "last_name": "Lieberman",
+                    "suffix": "M.D.",
+                    "actual_id": 388
+                }
+            }
+        ]
+    },
+    "hips": {
+        "order": 1,
+        "title": "Hip",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_Knee@2x.png",
+        "img_alt": "\"a circle targeting the Hip",
+        "desc": "When a replacement is necessary",
+        "data": [
+            {
+                "term_id": 15,
+                "question": {
+                    "post_id": 12358,
+                    "question": "Sed condimentum metus sed quam sagittis tempor",
+                    "answer": "<p>Fusce felis velit, malesuada quis faucibus sit amet, scelerisque non ex. Aenean eros diam, ornare vitae mi eget, varius tincidunt arcu. Aliquam odio lectus, porttitor eget ornare eu, egestas a ex. Curabitur nec condimentum metus. Donec tristique dui non sem tincidunt, quis aliquet lectus tempor. Praesent rhoncus odio quam, ac bibendum leo feugiat sed. Cras tristique augue vel bibendum ultrices.<\/p>\n",
+                    "doctor": 258,
+                    "category": {
+                        "term_id": 15,
+                        "name": "Hips",
+                        "slug": "hips",
+                        "term_group": 0,
+                        "term_taxonomy_id": 15,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 258,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Keefer_Eric.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/eric-p-keefer-m-d\/keefer_eric-2\/",
+                    "first_name": "Eric",
+                    "middle_name": "P.",
+                    "last_name": "Keefer",
+                    "suffix": "M.D.",
+                    "actual_id": 258
+                }
+            },
+            {
+                "term_id": 15,
+                "question": {
+                    "post_id": 12356,
+                    "question": "Sed in rutrum nisi",
+                    "answer": "<p>ultrices massa. Phasellus id augue non leo euismod tempus. Nulla posuere felis nec ligula vestibulum aliquet. Quisque gravida ipsum id lacus lacinia pulvinar. Nullam suscipit, mauris nec venenatis pharetra, augue tortor ultricies ante, eget pellentesque lectus velit eu massa. Donec ac risus non purus suscipit pharetra<\/p>\n",
+                    "doctor": 4769,
+                    "category": {
+                        "term_id": 15,
+                        "name": "Hips",
+                        "slug": "hips",
+                        "term_group": 0,
+                        "term_taxonomy_id": 15,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4769,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/11\/Scarpinato_Dorothy.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/dorothy-scarpinato-m-d\/scarpinato_dorothy\/",
+                    "first_name": "Dorothy",
+                    "middle_name": "F.",
+                    "last_name": "Scarpinato",
+                    "suffix": "M.D.",
+                    "actual_id": 4769
+                }
+            }
+        ]
+    },
+    "knee": {
+        "order": 2,
+        "title": "Knee",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_Knee@2x.png",
+        "img_alt": "\"a circle targeting the Knee",
+        "desc": "There are many causes and innovative treatments",
+        "data": [
+            {
+                "term_id": 11,
+                "question": {
+                    "post_id": 12368,
+                    "question": "Proin sed tortor vitae urna molestie",
+                    "answer": "<p>commodo. Ut eget tempor tortor. Praesent et mi a sapien auctor pulvinar. Phasellus a massa sed erat fringilla iaculis nec nec nulla. Integer odio arcu, finibus ut tristique ac, porttitor eget eros. Vivamus mollis arcu ut velit ornare varius. Fusce volutpat id ex ac feugiat. In pharetra ultrices massa<\/p>\n",
+                    "doctor": 233,
+                    "category": {
+                        "term_id": 11,
+                        "name": "Knee",
+                        "slug": "knee",
+                        "term_group": 0,
+                        "term_taxonomy_id": 11,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 233,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Gerber_Bradley.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/bradley-gerber-m-d\/gerber_bradley-2\/",
+                    "first_name": "Bradley",
+                    "middle_name": "",
+                    "last_name": "Gerber",
+                    "suffix": "M.D.",
+                    "actual_id": 233
+                }
+            },
+            {
+                "term_id": 11,
+                "question": {
+                    "post_id": 12366,
+                    "question": "Sed quis tortor ac diam suscipit mollis faucibus ac mauris",
+                    "answer": "<p>Fusce efficitur mattis nunc elementum dignissim. Proin dictum convallis erat, non rutrum enim molestie ac. Phasellus rhoncus nisi ut diam faucibus vulputate. Mauris dignissim,<\/p>\n<ul>\n<li>ipsum ac efficitur elementum,<\/li>\n<li>lectus nulla congue nisi, quis varius tellus leo eget velit.<\/li>\n<li>Aliquam interdum sed ipsum sed bibendum. Aliquam erat volutpat. Ut in pharetra urna, nec fermentum magna.<\/li>\n<\/ul>\n",
+                    "doctor": 415,
+                    "category": {
+                        "term_id": 11,
+                        "name": "Knee",
+                        "slug": "knee",
+                        "term_group": 0,
+                        "term_taxonomy_id": 11,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 415,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Price_Eric.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/eric-price\/price_eric-2\/",
+                    "first_name": "Eric",
+                    "middle_name": "",
+                    "last_name": "Price",
+                    "suffix": "M.D.",
+                    "actual_id": 415
+                }
+            }
+        ]
+    },
+    "joint-replacement": {
+        "order": 3,
+        "title": "Joint Replacement",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_Knee@2x.png",
+        "img_alt": "\"a circle targeting the Joints",
+        "desc": "Options to make you feel as good as new",
+        "data": [
+            {
+                "term_id": 16,
+                "question": {
+                    "post_id": 12364,
+                    "question": "feugiat turpis leo in urna",
+                    "answer": "<p>Sed eget dui dui. Sed in sapien id dui euismod tincidunt at eu dui. Nulla non sapien eu nisi mattis tincidunt a quis erat. Mauris auctor enim dolor, eget pulvinar ipsum luctus vel. Mauris interdum risus eget enim ultricies convallis.<\/p>\n",
+                    "doctor": 9798,
+                    "category": {
+                        "term_id": 16,
+                        "name": "Joint Replacement",
+                        "slug": "joint-replacement",
+                        "term_group": 0,
+                        "term_taxonomy_id": 16,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 9798,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2022\/08\/Cruz_Dana.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/dana-l-cruz-m-d\/cruz_dana\/",
+                    "first_name": "Dana",
+                    "middle_name": "L.",
+                    "last_name": "Cruz",
+                    "suffix": "M.D.",
+                    "actual_id": 9798
+                }
+            },
+            {
+                "term_id": 16,
+                "question": {
+                    "post_id": 12362,
+                    "question": "Nullam ut ultricies massa",
+                    "answer": "<p>Vras ornare purus sit amet dignissim pulvinar. Aliquam tempor facilisis urna eu blandit. Mauris efficitur mi turpis, eu viverra massa eleifend eu. Phasellus a interdum velit. Donec condimentum sagittis ex. Donec varius, dolor non tincidunt congue, nunc nunc fermentum dolor, quis feugiat turpis leo in urna. Sed eget dui dui.<\/p>\n",
+                    "doctor": 4509,
+                    "category": {
+                        "term_id": 16,
+                        "name": "Joint Replacement",
+                        "slug": "joint-replacement",
+                        "term_group": 0,
+                        "term_taxonomy_id": 16,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4509,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/11\/Palmieri_Marco.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/dr-marco-palmieri-d-o\/palmieri_marco-3\/",
+                    "first_name": "Marco",
+                    "middle_name": "",
+                    "last_name": "Palmieri",
+                    "suffix": "D.O.",
+                    "actual_id": 4509
+                }
+            },
+            {
+                "term_id": 16,
+                "question": {
+                    "post_id": 12360,
+                    "question": "Pellentesque sit amet quam sapien.",
+                    "answer": "<p>Suspendisse vel pretium metus. Vestibulum sollicitudin metus vitae lacus sodales, vel interdum metus condimentum. Donec justo purus, vestibulum a tortor non, interdum tristique tellus. Mauris sed dui at urna molestie ultrices. Duis dignissim enim scelerisque egestas egestas. Pellentesque eget eros nec dui facilisis ullamcorper<\/p>\n",
+                    "doctor": 258,
+                    "category": {
+                        "term_id": 16,
+                        "name": "Joint Replacement",
+                        "slug": "joint-replacement",
+                        "term_group": 0,
+                        "term_taxonomy_id": 16,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 258,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Keefer_Eric.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/eric-p-keefer-m-d\/keefer_eric-2\/",
+                    "first_name": "Eric",
+                    "middle_name": "P.",
+                    "last_name": "Keefer",
+                    "suffix": "M.D.",
+                    "actual_id": 258
+                }
+            }
+        ]
+    },
+    "shoulder": {
+        "order": 4,
+        "title": "Shoulder",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_Shoulder@2x.png",
+        "img_alt": "\"a circle targeting the Shoulder",
+        "desc": "Raise your hand if you can\u2019t raise your hand",
+        "data": [
+            {
+                "term_id": 10,
+                "question": {
+                    "post_id": 12388,
+                    "question": "In ultrices eros quam, et pharetra lorem tincidunt id?",
+                    "answer": "<p>volutpat ullamcorper. Praesent tempor lacus ante, ut accumsan augue tincidunt vitae. Pellentesque tempor, nisl id commodo mollis, diam dui c<\/p>\n",
+                    "doctor": 4163,
+                    "category": {
+                        "term_id": 10,
+                        "name": "Shoulder",
+                        "slug": "shoulder",
+                        "term_group": 0,
+                        "term_taxonomy_id": 10,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4163,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Morelli_Brian.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/brian-n-morelli-m-d\/morelli_brian\/",
+                    "first_name": "Brian",
+                    "middle_name": "N.",
+                    "last_name": "Morelli",
+                    "suffix": "M.D.",
+                    "actual_id": 4163
+                }
+            },
+            {
+                "term_id": 10,
+                "question": {
+                    "post_id": 12386,
+                    "question": "In ultrices eros quam, et pharetra l?",
+                    "answer": "<p>tas mattis justo sit amet rhoncus. Ut laoreet tincidunt nisl, mattis interdum libero aliquam eget. Sed scelerisque purus urna, ut luctus urna volutpat ullamcorper. Praesent tempor lacus ante, ut accumsan augue tincidunt vitae. Pellentesque tempor, nisl id commodo molli<\/p>\n",
+                    "doctor": 512,
+                    "category": {
+                        "term_id": 10,
+                        "name": "Shoulder",
+                        "slug": "shoulder",
+                        "term_group": 0,
+                        "term_taxonomy_id": 10,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 512,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Tarleton_Andrew.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/andrew-a-tarleton-m-d\/tarleton_andrew-2\/",
+                    "first_name": "Andrew",
+                    "middle_name": "A.",
+                    "last_name": "Tarleton",
+                    "suffix": "M.D.",
+                    "actual_id": 512
+                }
+            }
+        ]
+    },
+    "sports-medicine": {
+        "order": 5,
+        "title": "Sports Medicine",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_Shoulder@2x.png",
+        "img_alt": "\"a circle targeting the sport players Joint",
+        "desc": "Get back in the game with our specialists\u2019 care",
+        "data": [
+            {
+                "term_id": 12,
+                "question": {
+                    "post_id": 12384,
+                    "question": "Vivamus rutrum feugiat sapien?",
+                    "answer": "<p>Donec consectetur dignissim mauris non vestibulum. Nullam mollis quam odio, a dignissim libero vehicula auctor. Nam fermentum metus dolor, posuere blandit tellus efficitur at.<\/p>\n",
+                    "doctor": 334,
+                    "category": {
+                        "term_id": 12,
+                        "name": "Sports Medicine",
+                        "slug": "sports-medicine",
+                        "term_group": 0,
+                        "term_taxonomy_id": 12,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 334,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Levitz_Craig.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/craig-levitz-m-d\/levitz_craig-2\/",
+                    "first_name": "Craig",
+                    "middle_name": "",
+                    "last_name": "Levitz",
+                    "suffix": "M.D.",
+                    "actual_id": 334
+                }
+            },
+            {
+                "term_id": 12,
+                "question": {
+                    "post_id": 12381,
+                    "question": "Nam hendrerit pretium tortor, vitae egestas?",
+                    "answer": "<p>tortor, vitae egestas purus hendrerit sit amet. Aenean nisl nunc, eleifend sit amet quam non, lacinia elementum felis. Suspendisse dictum quam nibh, ut cursus urna bibendum feugiat. Vivamus rut<\/p>\n",
+                    "doctor": 9798,
+                    "category": {
+                        "term_id": 12,
+                        "name": "Sports Medicine",
+                        "slug": "sports-medicine",
+                        "term_group": 0,
+                        "term_taxonomy_id": 12,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 9798,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2022\/08\/Cruz_Dana.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/dana-l-cruz-m-d\/cruz_dana\/",
+                    "first_name": "Dana",
+                    "middle_name": "L.",
+                    "last_name": "Cruz",
+                    "suffix": "M.D.",
+                    "actual_id": 9798
+                }
+            },
+            {
+                "term_id": 12,
+                "question": {
+                    "post_id": 12379,
+                    "question": "tellus nunc pellentesque leo, non congue nisl arcu eu dolor?",
+                    "answer": "<p>Curabitur ultricies nulla et urna suscipit rhoncus. Nullam rutrum, dui sit amet tristique semper, nibh est mattis libero, ac venenatis arcu arcu nec mauris. Praesent viverra, est ac commodo finibus, purus ante sagittis quam, hendrerit posuere orci nunc eu metus.<\/p>\n",
+                    "doctor": 408,
+                    "category": {
+                        "term_id": 12,
+                        "name": "Sports Medicine",
+                        "slug": "sports-medicine",
+                        "term_group": 0,
+                        "term_taxonomy_id": 12,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 408,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Paci_James.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/james-paci-m-d\/paci_james-2\/",
+                    "first_name": "James",
+                    "middle_name": "",
+                    "last_name": "Paci",
+                    "suffix": "M.D.",
+                    "actual_id": 408
+                }
+            }
+        ]
+    },
+    "acupuncture": {
+        "order": 6,
+        "title": "Acupuncture",
+        "image": "\/wp-content\/uploads\/2023\/02\/AccordionImg_SportsMed@2x.png",
+        "img_alt": "\"a circle targeting Acupuncture in shoulder",
+        "desc": "Ease pain and restore wellness, naturally",
+        "data": [
+            {
+                "term_id": 13,
+                "question": {
+                    "post_id": 12350,
+                    "question": "Donec sodales tempus neque",
+                    "answer": "<p>neque, at scelerisque eros. Nam mollis euismod ipsum a ultricies. Donec mattis nibh neque, quis laoreet tellus sollicitudin vitae. Nam a varius ante. Sed eu pretium ex. Nunc eget lectus arcu. Nam congue sem eget sollicitudin gravida.<\/p>\n",
+                    "doctor": 4769,
+                    "category": {
+                        "term_id": 13,
+                        "name": "Acupuncture",
+                        "slug": "acupuncture",
+                        "term_group": 0,
+                        "term_taxonomy_id": 13,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4769,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/11\/Scarpinato_Dorothy.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/dorothy-scarpinato-m-d\/scarpinato_dorothy\/",
+                    "first_name": "Dorothy",
+                    "middle_name": "F.",
+                    "last_name": "Scarpinato",
+                    "suffix": "M.D.",
+                    "actual_id": 4769
+                }
+            },
+            {
+                "term_id": 13,
+                "question": {
+                    "post_id": 12347,
+                    "question": "In leo dui, sodales ut lorem non",
+                    "answer": "<p>aliquam libero. Praesent egestas eros eu magna iaculis, at hendrerit turpis aliquam. Etiam fringilla urna id quam accumsan tristique. Nulla viverra non risus sed elementum. Duis feugiat dapibus velit, et commodo metus malesuada ut. Praesent vitae tristique tortor, nec consectetur nibh. Aenean pulvinar, sapien eu dapibus eleifend, diam nisl efficitur diam, a rutrum lorem ipsum nec velit. Aenean malesuada tincidunt nisi, eget consequat odio convallis a<\/p>\n",
+                    "doctor": 504,
+                    "category": {
+                        "term_id": 13,
+                        "name": "Acupuncture",
+                        "slug": "acupuncture",
+                        "term_group": 0,
+                        "term_taxonomy_id": 13,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 504,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Shah_Alpesh.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/alpesh-shah-m-d\/shah_alpesh-2\/",
+                    "first_name": "Alpesh",
+                    "middle_name": "",
+                    "last_name": "Shah",
+                    "suffix": "M.D.",
+                    "actual_id": 504
+                }
+            },
+            {
+                "term_id": 13,
+                "question": {
+                    "post_id": 12345,
+                    "question": "What is Lorem Ipsum?",
+                    "answer": "<p><strong>Lorem Ipsum<\/strong>\u00a0is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#8217;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,<\/p>\n",
+                    "doctor": 4683,
+                    "category": {
+                        "term_id": 13,
+                        "name": "Acupuncture",
+                        "slug": "acupuncture",
+                        "term_group": 0,
+                        "term_taxonomy_id": 13,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4683,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Rothfeld_Alex.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/alex-a-rothfeld-m-d\/rothfeld_alex-2\/",
+                    "first_name": "Alex",
+                    "middle_name": "A.",
+                    "last_name": "Rothfeld",
+                    "suffix": "M.D.",
+                    "actual_id": 4683
+                }
+            }
+        ]
+    },
+    "clinical-trials": {
+        "order": 7,
+        "title": "Clinical Trials",
+        "image": "\/wp-content\/uploads\/2023\/04\/AccordionImg_Medical@2x.png",
+        "img_alt": "\"a circle targeting the latest medical trials",
+        "desc": "Pioneering new treatments",
+        "data": [
+            {
+                "term_id": 14,
+                "question": {
+                    "post_id": 12354,
+                    "question": "Morbi ac vulputate turpis",
+                    "answer": "<p>pharetra scelerisque nunc. Vestibulum non maximus erat. In hac habitasse platea dictumst. Morbi lacinia massa urna, in aliquet nulla facilisis in. Donec posuere scelerisque mauris, nec ultricies urna faucibus in. Nam nec odio ex. Donec id vehicula tellus.<\/p>\n",
+                    "doctor": 4811,
+                    "category": {
+                        "term_id": 14,
+                        "name": "Clinical Trials",
+                        "slug": "clinical-trials",
+                        "term_group": 0,
+                        "term_taxonomy_id": 14,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 4811,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/11\/Marano_Henry.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/henry-marano-m-d\/marano_henry-2\/",
+                    "first_name": "Henry",
+                    "middle_name": "",
+                    "last_name": "Marano",
+                    "suffix": "M.D.",
+                    "actual_id": 4811
+                }
+            },
+            {
+                "term_id": 14,
+                "question": {
+                    "post_id": 12352,
+                    "question": "Pellentesque consectetur purus ante",
+                    "answer": "<p>ultricies lectus consequat posuere. In condimentum justo ut bibendum viverra. Sed maximus feugiat nulla ut scelerisque. Vivamus in nisi sed ante luctus rhoncus. Nunc efficitur, neque non interdum scelerisque, sem arcu tempor arcu, nec mollis magna augue eu nibh. Nunc orci mi, accumsan ac euismod vel, fermentum eu lectus. Duis ac fringilla neque, eu vestibulum justo. Donec fringilla leo at dui semper facilisis.<\/p>\n",
+                    "doctor": 334,
+                    "category": {
+                        "term_id": 14,
+                        "name": "Clinical Trials",
+                        "slug": "clinical-trials",
+                        "term_group": 0,
+                        "term_taxonomy_id": 14,
+                        "taxonomy": "category",
+                        "description": "",
+                        "parent": 0,
+                        "count": 0,
+                        "filter": "raw"
+                    }
+                },
+                "doctor": {
+                    "doctor_post_id": 334,
+                    "bio_image": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/wp-content\/uploads\/2019\/10\/Levitz_Craig.jpg",
+                    "doctor_link": "https:\/\/wordpress-969289-3607048.cloudwaysapps.com\/orthopedic-doctors\/craig-levitz-m-d\/levitz_craig-2\/",
+                    "first_name": "Craig",
+                    "middle_name": "",
+                    "last_name": "Levitz",
+                    "suffix": "M.D.",
+                    "actual_id": 334
+                }
+            }
+        ]
+    }
+}

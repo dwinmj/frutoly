@@ -1,0 +1,1781 @@
+<style>
+	
+	section.specialist-question-cards{
+		margin-bottom: 4em;
+	}
+
+	.specialist-question-section{
+		width: 100%;
+		position: relative;
+		margin-bottom: 4em;
+	}
+	
+	.specialist-question-header{
+		position: relative;
+		width: 100%;
+		min-height: 100px;
+		height: 100px;
+		border: 1px solid #c0c9cc;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	img.question-icon{
+		position: absolute;
+		bottom: 0;
+		left: 2em;
+		width: 125px;
+	}
+	
+	div.question-topic{
+		width: calc(100% - (4em + 125px));
+	}
+	
+	div.question-topic h2{
+		color: #023446;
+		font-size: 28px;
+	}
+	
+	div.question-topic p{
+		color: #006a8f;
+		font-size: 14px;
+		font-style: italic;
+	}
+	
+	div.icon-spacer{
+		width: calc(4em + 125px);
+	}
+	
+	button.section-toggle{
+		width: 2em;
+		height: 2em;
+		background-color: #f79c33;
+		color: white;
+		margin-right: 2em;
+		cursor: pointer;
+	}
+	
+	div.specialist-question-body{
+		margin-top: 2em;
+		width: 100%;
+		display: none;
+		grid-template-columns: repeat(3 , 1fr);
+		gap: 1em;
+	}
+	
+	div.grid-item{
+		position: relative;
+		width: 100%;
+		height: 350px;
+		/*padding: 1em;*/
+		background-color: transparent;
+		perspective: 1000px;
+	}
+	
+	div.grid-item-inner , div.grid-item-front{
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	div.grid-item-inner{
+		position: relative;
+		transition: transform 0.8s;
+  		transform-style: preserve-3d;
+		-webkit-transition: transform 0.8s;
+  		-webkit-transform-style: preserve-3d;
+		width: 100%;
+		height: 350px;
+	}
+
+	div.grid-item-front , div.grid-item-back{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 350px;
+		padding: 1em;
+		-webkit-backface-visibility: hidden;  /* Safari */
+  		backface-visibility: hidden; 
+	}
+	
+	div.grid-item-front , div.grid-item-back{
+		border: 1px solid #c0c9cc;
+		box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.1);
+		background-color: white;
+	}
+	
+	div.grid-item-front{
+		transform: translateZ(-1px);
+		-webkit-transform: translateZ(-1px);
+	}
+	
+	div.grid-item-back{
+		padding: 2.5em;
+	}
+	
+	div.gq-wrap{
+		position: absolute;
+    	top: 0;
+    	left: 0;
+		width: 100%;
+    	height: calc(100% - 35px - 2em);
+    	display: inline-flex;
+    	justify-content: center;
+    	align-items: center;
+	}
+	
+	div.grid-item-back{
+		transform: rotateY(180deg) translateZ(1px);
+		-webkit-transform: rotateY(180deg) translateZ(1px);
+	}
+	
+	button.close-card{
+		font-size: 1.25em;
+		color: #0e688e;
+		cursor: pointer !important;
+		/*z-index: 1000;*/
+		transition: transform .4s ease-in-out;
+		-webkit-transition: transform .4s ease-in-out;
+	}
+	
+	button.close-card:hover{
+		transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+	}
+	
+	/*
+	div.grid-item:hover div.grid-item-inner{
+		transform: rotateY(180deg);
+	}*/
+	
+	h2.grid-question{
+		font-size: 28px;
+		color: #006a8f;
+		text-align: center;
+		padding-left: 1em;
+    	padding-right: 1em;
+	}
+	
+	q.grid-question{
+		font-family: "Raleway",sans-serif;
+		color: #023446;
+		font-weight: 500;
+    	font-size: 18px;
+		line-height: 26px;
+	}
+	
+	button.view-answer{
+		position: absolute;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+		bottom: 2em;
+		font-size: 14px;
+	}
+	
+	div.grid-doc-info{
+		width: 100%;
+		display: inline-flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1em;
+	}
+	
+	div.pfp-wrap{
+		position: relative;
+		width: 50px;
+		height: 50px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		border: 4px #f79c33 solid;
+		border-radius: 60px;
+		overflow: hidden !important;
+	}
+	
+	img.doc-pfp{
+		width: 100%;
+		height: auto;
+	}
+	
+	p.doc-name{
+		font-family: "PT Serif",serif;
+		color: #0e688e;
+		margin-left: 1em;
+	}
+	
+	div.modal-bg{
+		display: none;
+		width: 100vw;
+    	height: 100vh;
+    	background-color: #133344;
+    	position: fixed;
+    	top: 0;
+    	left: 0;
+    	z-index: 999997;
+		opacity: .75;
+	}
+	
+	div.grid-modal{
+		position: fixed;
+		top: 141px;
+    	left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+    	width: 90%;
+    	height: calc(100vh - 242px);
+    	z-index: 999998;
+	}
+	
+	div.grid-item-inner.active-card , div.grid-item-inner.active-card div.grid-item-front, div.grid-item-inner.active-card div.grid-item-back{
+		height: auto;
+	}
+	
+	img.icon-type2 {
+    	width: 150px;
+    	left: 0;
+	}
+	
+	img.accup-icon{
+		bottom: -20px;
+	}
+	
+	@media screen and (max-width: 1100px){
+		div.specialist-question-body{
+			grid-template-columns: repeat(2 , 1fr);
+		}
+	}
+	
+	@media screen and (max-width: 700px){
+		div.question-topic{
+			padding-left: 1em;
+			padding-right: 1em;
+		}
+		div.question-topic h2 , h2.grid-question{
+			font-size: 20px;
+			line-height: 20px;
+		}
+		div.question-topic p{
+			margin-top: 5px;
+			font-size: 12px;
+			line-height: 14px;
+		}
+		div.specialist-question-body{
+			grid-template-columns: repeat(1 , 1fr);
+		}
+		img.question-icon , div.icon-spacer{
+			display: none;
+		}
+		div.question-topic{
+			width: calc(100% - 2em);
+			padding-left: 2em;
+		}
+		.specialist-question-section{
+			margin-bottom: 2em;
+		}
+		button.section-toggle{
+			margin-right: 1em;
+		}
+		div.grid-item-inner , button.close-card{
+			transition: transform 0s;
+		}
+		button.close-card:hover{
+			transform: none;
+			-webkit-transform: none;
+		}
+		h2.grid-question{
+			font-size: 28px;
+    		line-height: 30px;
+    		text-indent: -0.4em;
+			padding-left: 1.5em;
+			padding-right: 2em;
+			text-align: left;
+		}
+		div.grid-item , div.grid-item-inner ,
+		div.grid-item-front , div.grid-item-back{
+			height: 300px;
+		}
+		div.gq-wrap{
+			justify-content: flex-start;
+		}
+	}
+	
+	@media screen and (max-width: 500px){
+		button.btn.view-answer{
+			left: 40px !important;
+			-webkit-transform: translateX(0) !important;
+			transform: translateX(0) !important;
+		}
+	}
+	
+</style>
+<section class="specialist-question-cards module">
+	<div class="grid-container">
+		
+				
+		<!-- UPPER EXTREMITIES ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon icon-type2" src="/wp-content/uploads/2023/04/AccordionImg_Hand-Upper@2x.png" alt="a logo with a black background" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Hand &amp; Upper Extremities
+						</h2>
+						<p>
+							Treatments from shoulders to fingertips
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12045">
+										<div class="grid-item-inner" id="12045">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is trigger finger?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12045);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="186" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Brown_Bennett.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bennett-h-brown-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bennett H. Brown, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bennett-h-brown-m-d/$bennetth.brown,m.d."><p class="doc-name">Bennett H. Brown, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12045);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Trigger finger is caused by a mismatch between the size of the tendons that bend your finger and the sheath around them. It can cause pain, swelling, and stiffness and your finger may “click” or even lock up when you move it.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12046">
+										<div class="grid-item-inner" id="12046">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What activities cause trigger finger?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12046);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="186" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Brown_Bennett.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bennett-h-brown-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bennett H. Brown, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bennett-h-brown-m-d/$bennetth.brown,m.d."><p class="doc-name">Bennett H. Brown, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12046);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“In most cases, the cause of trigger finger is unknown. However, repetitive gripping or trauma to the hand may contribute. It is also more common with certain conditions like diabetes and rheumatoid arthritis.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- UPPER EXTREMITIES ACCORDION -->
+		
+		<!-- HELP FOR YOUR HIPS ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon icon-type2" src="/wp-content/uploads/2023/04/AccordionImg_Hip@2x.png" alt="a black and yellow logo" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Hip
+						</h2>
+						<p>
+							When a replacement is necessary
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12022">
+										<div class="grid-item-inner" id="12022">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does a hip replacement last?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12022);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="233" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Gerber_Bradley.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bradley Gerber, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/$bradleygerber,m.d."><p class="doc-name">Bradley Gerber, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12022);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most hip replacements last a lifetime, giving patients decades to enjoy a pain-free life.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12023">
+										<div class="grid-item-inner" id="12023">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does hip replacement surgery take?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12023);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="233" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Gerber_Bradley.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bradley Gerber, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/$bradleygerber,m.d."><p class="doc-name">Bradley Gerber, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12023);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most hip replacements take about an hour.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12024">
+										<div class="grid-item-inner" id="12024">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does it take to recover from a hip replacement?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12024);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="233" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Gerber_Bradley.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bradley Gerber, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/$bradleygerber,m.d."><p class="doc-name">Bradley Gerber, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12024);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“While everyone’s situation is different, initial recovery takes an average of two to four weeks and complete recovery typically takes six months.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12025">
+										<div class="grid-item-inner" id="12025">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long after a hip replacement can I tie my shoes?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12025);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="233" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Gerber_Bradley.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bradley Gerber, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/$bradleygerber,m.d."><p class="doc-name">Bradley Gerber, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12025);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Everyone’s situation is different, but you should be able to tie your shoes within a month of your hip replacement.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12026">
+										<div class="grid-item-inner" id="12026">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What should I not do after a hip replacement?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12026);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="233" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Gerber_Bradley.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Bradley Gerber, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/bradley-gerber-m-d/$bradleygerber,m.d."><p class="doc-name">Bradley Gerber, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12026);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“In general, most patients should avoid flexing the hip and externally rotating it for at least two months. But you should discuss your dos and don’ts with your surgeon.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- HELP FOR YOUR HIPS ACCORDION -->
+		
+		<!-- KNEE ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon" src="/wp-content/uploads/2023/02/AccordionImg_Knee@2x.png" alt="icon" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Knee
+						</h2>
+						<p>
+							There are many causes and innovative treatments
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-11148">
+										<div class="grid-item-inner" id="11148">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is arthritis of the knee?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11148);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11148);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Arthritis is a condition that involves the loss of the cartilage on the end of the bones in the knee, like losing tread on a tire. When the cartilage wears out, the bones experience friction against each other and cause pain and swelling; sometimes called “water on the knee.””</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11149">
+										<div class="grid-item-inner" id="11149">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How do you treat arthritis?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11149);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11149);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“While arthritis cannot be cured, it can be managed. The goal is to reduce inflammation. We have a variety of options, including oral medications, cortisone shots, and gel injections, which are used to help lubricate the knee. Physical therapy also can be very helpful to keep the knee strong.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11150">
+										<div class="grid-item-inner" id="11150">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What activities should I avoid if I have arthritis?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11150);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11150);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“I never tell people not to be active, but I do tell them to find activities that don’t bother their knees. It’s the opposite of “no pain, no gain.” Things like deep squats or lunges put a lot of extra stress on the knee. Lower-impact activities are better for folks who have arthritis.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11151">
+										<div class="grid-item-inner" id="11151">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is the meniscus?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11151);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11151);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The meniscus is shock-absorbing cartilage between two bones in the knee, shaped like a C. There are two: One inside and one outside. When a meniscus tears, it results in a piece that moves about like a hangnail and can get pinched and stuck between the two bones—which is what causes pain.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10435">
+										<div class="grid-item-inner" id="10435">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Can a torn meniscus heal on its own?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10435);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10435);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Unfortunately, no. A small percentage of tears can be repaired surgically but surgery is not always necessary. Some people do well with physical therapy and anti-inflammatory medicine. But if you feel like something is clicking or catching in the knee, surgery is likely the right choice.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11152">
+										<div class="grid-item-inner" id="11152">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What are ligament tears?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11152);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="415" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Price_Eric.jpg" alt="a bald man wearing a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/eric-price/" target="_blank" data-uw-rm-brl="false" aria-label="Eric Price, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/eric-price/$ericprice,m.d."><p class="doc-name">Eric Price, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11152);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“There are four ligaments in the knee that stabilize the joint. The ACL is the one that is most commonly injured or torn. While ACL tears often require surgery, other knee ligaments can be sprained and may not necessarily require an operation.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11153">
+										<div class="grid-item-inner" id="11153">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What does your anterior cruciate ligament—or ACL—do?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11153);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11153);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The ACL supports and stabilizes the knee. It is crucial for knee stability, preventing rotational and anterior knee translation and buckling. Without an ACL, pivoting and cutting activities and sports, navigating uneven ground and slippery surfaces are difficult.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10438">
+										<div class="grid-item-inner" id="10438">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Is there anything I can do to prevent my ACL from tearing?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10438);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10438);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“There is good evidence that you can significantly decrease your chance of a noncontact ACL tear with proper training, such as the FIFA-11+ warm-up.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11154">
+										<div class="grid-item-inner" id="11154">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"If I tear my ACL, do I need to have surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11154);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11154);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Generally, if you want to return to pivoting and cutting activities and sports, you should consider surgery. Younger and more active patients usually have better long-term outcomes and function with surgery, rather than nonoperative treatment.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11155">
+										<div class="grid-item-inner" id="11155">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Are there different types of ACL surgeries?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11155);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11155);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“There are ACL repair and reconstruction options. ACL repair is generally for tears where the ligament is pulled off from the femur (thigh bone) or the tibia (shin bone). In ACL reconstruction, the torn ligament is replaced with a free tissue graft from the patient or a donor.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10441">
+										<div class="grid-item-inner" id="10441">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does it take to rehabilitate after ACL surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10441);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10441);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“In general, you can expect to return to full activities six to nine months after surgery. With an accelerated rehab program, patients usually can run in a straight line, without pivoting or cutting at about 12 weeks post-op.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11156">
+										<div class="grid-item-inner" id="11156">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"If I do have ACL surgery, can I retear it? How do I prevent that?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11156);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11156);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“There is low risk of retearing your ACL. Factors such as age, gender, activity level, type of surgery, and time from surgery to return to full activity can affect this risk. You can prevent retear with post-op rehab and a structured return-to-play program. A knee brace can also help.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12036">
+										<div class="grid-item-inner" id="12036">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does a knee replacement last?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12036);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="388" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Lieberman_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory Lieberman, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/$gregorylieberman,m.d."><p class="doc-name">Gregory Lieberman, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12036);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most modern knee replacements last 25 years or more, which can mean decades of pain-free living.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12037">
+										<div class="grid-item-inner" id="12037">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does a knee replacement surgery take?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12037);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="388" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Lieberman_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory Lieberman, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/$gregorylieberman,m.d."><p class="doc-name">Gregory Lieberman, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12037);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Knee replacement surgery takes approximately 60 to 90 minutes.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12038">
+										<div class="grid-item-inner" id="12038">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does it take to recover from a knee replacement?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12038);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="388" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Lieberman_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory Lieberman, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/$gregorylieberman,m.d."><p class="doc-name">Gregory Lieberman, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12038);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“It takes about three months to a year to feel fully recovered from a knee replacement, but most patients see improvement in both pain and function sooner.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12039">
+										<div class="grid-item-inner" id="12039">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How bad does a knee have to be before knee replacement?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12039);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="388" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Lieberman_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory Lieberman, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/$gregorylieberman,m.d."><p class="doc-name">Gregory Lieberman, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12039);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Having a knee replacement is a very personal decision and it really differs from person to person. At the end of the day, it depends on the severity of the pain and how much it is affecting the individual’s quality of life.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12040">
+										<div class="grid-item-inner" id="12040">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long does pain last after a knee replacement?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12040);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="388" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Lieberman_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory Lieberman, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-lieberman/$gregorylieberman,m.d."><p class="doc-name">Gregory Lieberman, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12040);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The first two weeks after a knee replacement can be a bit painful. It is not uncommon to have pain past that point, but it should improve throughout the postoperative period.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- KNEE ACCORDION -->
+		
+		<!-- JOINT REPLACEMENT ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon icon-type2" src="/wp-content/uploads/2023/04/AccordionImg_Joint@2x.png" alt="icon" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Joint Replacement
+						</h2>
+						<p>
+							Options to make you feel as good as new
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12027">
+										<div class="grid-item-inner" id="12027">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Am I a good candidate for joint replacement surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12027);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12027);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Anyone who has had pain in their joints for an extended period may be a candidate. When over-the-counter medications, exercise, weight loss, and nutrition changes fail to deliver relief, it is time to see a doctor and be evaluated.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12028">
+										<div class="grid-item-inner" id="12028">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long will joint replacement surgery take, and how long will I be hospitalized?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12028);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12028);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most joint replacements done by a specialist will take between 45 and 90 minutes and the majority of patients are able to leave the hospital the next day. Select patients may need to stay in the hospital for only a few hours and sleep in their own bed that night.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12029">
+										<div class="grid-item-inner" id="12029">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Should I expect pain after joint replacement surgery, and how will it be managed?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12029);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12029);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Current pain management techniques and “multimodal” pain control can prevent severe pain after surgery. Most patients tolerate oral medications like Tylenol, anti-inflammatories, and injections that significantly decrease pain and allow for movement just hours after surgery.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12030">
+										<div class="grid-item-inner" id="12030">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What are the risks and complications of joint replacement surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12030);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12030);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Joint replacement is safe, with complication rates less than 1%. However, like any lower extremity surgery, there is a risk of blood clots, infections, and nerve injury. There are also specific complications related to individual procedures that you will discuss with your physician.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12031">
+										<div class="grid-item-inner" id="12031">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long will it take to recover from joint replacement surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12031);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12031);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“After joint replacement, most people can walk within a few hours, climb stairs and get into their bed within a day or two, and drive within two to six weeks. Many return to some athletic activity in six to 12 weeks, depending on the nature of their surgery and their preoperative functional level.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12032">
+										<div class="grid-item-inner" id="12032">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Will I need physical therapy after joint replacement surgery, and for how long?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12032);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12032);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most patients do some form of physical therapy after their surgery. However, this is not a requirement if the patient is able to do appropriate home exercises on their own to build up mobility and strength.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12034">
+										<div class="grid-item-inner" id="12034">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How long can I expect the joint replacement to last?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12034);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12034);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“There are a lot of factors that determine how long joint replacements last. There is good research to show that some joint replacements can last 20 to 30 years. As our technology and implants improve, most medical professionals feel this timeframe will continue to increase.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12035">
+										<div class="grid-item-inner" id="12035">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What lifestyle changes will I need to make after surgery to protect my new joint?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12035);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="242" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Germano_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James A. Germano, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-a-germano-m-d/$jamesa.germano,m.d."><p class="doc-name">James A. Germano, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12035);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Depending on which joint and the type of surgery, this answer can vary. Most patients will need very few modifications and will be able to return to all their prior activities. The goal of joint replacement is to get patients back to things they couldn’t do because of severe joint pain.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- JOINT REPLACEMENT ACCORDION -->
+		
+		<!-- SHOULDER ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon" src="/wp-content/uploads/2023/02/AccordionImg_Shoulder@2x.png" alt="a close-up of a logo" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Shoulder
+						</h2>
+						<p>
+							Raise your hand if you can’t raise your hand
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-10426">
+										<div class="grid-item-inner" id="10426">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is the rotator cuff?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10426);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="515" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Ticker_Jonathan.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Jonathan B. Ticker, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/$jonathanb.ticker,m.d."><p class="doc-name">Jonathan B. Ticker, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10426);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The rotator cuff of the shoulder is the four muscles that do just that: Rotate the arm to position the hand. The muscles are attached by their tendons to the bone at the top of the arm, which is the head of the humerus.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10428">
+										<div class="grid-item-inner" id="10428">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What causes a rotator cuff tear and how does it feel?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10428);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="515" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Ticker_Jonathan.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Jonathan B. Ticker, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/$jonathanb.ticker,m.d."><p class="doc-name">Jonathan B. Ticker, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10428);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“A rotator cuff tear means that one or more tendons detach from the upper arm bone (humerus). Tears can vary in size and symptom severity. Tears can be sudden, as with an injury, or develop over time. Weakness and pain increase with severity.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11146">
+										<div class="grid-item-inner" id="11146">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Do all rotator cuff tears require surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11146);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="4577" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Mallo_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-c-mallo-m-d-f-a-a-o-s/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory C. Mallo, M.D., F.A.A.O.S. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-c-mallo-m-d-f-a-a-o-s/$gregoryc.mallo,m.d.,f.a.a.o.s."><p class="doc-name">Gregory C. Mallo, M.D., F.A.A.O.S.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11146);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“A partial rotator cuff tear may cause minimal discomfort or limitations. Treatments include rest, anti-inflammatories, physical therapy, or even injections. A full tear (tendon detachment from the bone) can be quite painful and limit function, and often requires surgery.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11147">
+										<div class="grid-item-inner" id="11147">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Why should I choose a fellowship-trained shoulder specialist to treat my rotator cuff?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11147);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="515" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Ticker_Jonathan.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Jonathan B. Ticker, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/$jonathanb.ticker,m.d."><p class="doc-name">Jonathan B. Ticker, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11147);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“When your doctor is specialized, they have greater training and expertise in your area of concern, and more experience with surgical techniques and post-op care. This can mean a more successful outcome and recovery.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11163">
+										<div class="grid-item-inner" id="11163">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How does my doctor determine if I need rotator cuff surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11163);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="515" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Ticker_Jonathan.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Jonathan B. Ticker, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/jonathan-b-ticker-m-d/$jonathanb.ticker,m.d."><p class="doc-name">Jonathan B. Ticker, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11163);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“An MRI is often used to confirm if a rotator cuff is torn, which tendons are involved, the tear pattern, and the condition of the muscle. Assessing these and other factors like patients’ age, age and severity of the tear, and arm dominance help determine if surgery is needed.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-11164">
+										<div class="grid-item-inner" id="11164">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What can I expect with rotator cuff surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(11164);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="4577" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Mallo_Gregory.jpg" alt="a man in a suit and tie" data-uw-rm-ima="ai">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/gregory-c-mallo-m-d-f-a-a-o-s/" target="_blank" data-uw-rm-brl="false" aria-label="Gregory C. Mallo, M.D., F.A.A.O.S. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/gregory-c-mallo-m-d-f-a-a-o-s/$gregoryc.mallo,m.d.,f.a.a.o.s."><p class="doc-name">Gregory C. Mallo, M.D., F.A.A.O.S.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(11164);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Following rotator cuff surgery — typically a one-hour, same-day, outpatient procedure — your arm will likely be in a sling or cryotherapy device for 2-6 weeks. Some type of pain medication may be recommended. But each tear is unique, so treatment is customized to each patient.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- SHOULDER ACCORDION -->
+
+		<!-- SPORTS MED ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon" src="/wp-content/uploads/2023/02/AccordionImg_SportsMed@2x.png" alt="a black and yellow logo" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Sports Medicine
+						</h2>
+						<p>
+							Get back in the game with our specialists’ care
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12052">
+										<div class="grid-item-inner" id="12052">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is the most common sports injury?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12052);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="334" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Levitz_Craig.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Craig Levitz, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/$craiglevitz,m.d."><p class="doc-name">Craig Levitz, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12052);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The most common types of sports injuries are strains and sprains. A strain is a muscle injury that happens when you stretch or tear a muscle by overextending it. A sprain is a stretch or tear of a ligament near a joint, like an ankle, knee, elbow, shoulder, or wrist.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12053">
+										<div class="grid-item-inner" id="12053">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What are the causes of sports injuries?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12053);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="334" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Levitz_Craig.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Craig Levitz, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/$craiglevitz,m.d."><p class="doc-name">Craig Levitz, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12053);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Sports injuries can happen for a variety of reasons. The most common causes of sports injuries are misuse (caused by improper form), overuse (using a body part repeatedly without adequate rest), and direct impact (a contact injury like a fall or a hit).”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12054">
+										<div class="grid-item-inner" id="12054">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How do I deal with sports injuries?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12054);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="334" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Levitz_Craig.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Craig Levitz, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/$craiglevitz,m.d."><p class="doc-name">Craig Levitz, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12054);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Proper technique, stretching, and strength and endurance training can help prevent sports injuries. Learn <a href="https://www.orlincohen.com/news/how-to-prevent-athletic-injuries/" data-uw-rm-brl="false">how to reduce the risk</a>. If you are injured, never play through pain. Instead, seek care from an orthopedic specialist like Orlin &amp; Cohen: <a href="https://www.orlincohen.com/request-an-appointment/" data-uw-rm-brl="false">Request an appointment</a>.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12055">
+										<div class="grid-item-inner" id="12055">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How do I recover from a sports injury?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12055);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="334" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Levitz_Craig.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="Craig Levitz, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/craig-levitz-m-d/$craiglevitz,m.d."><p class="doc-name">Craig Levitz, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12055);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Seek early intervention and treatment. The RICE method – rest, ice, compression and elevation – is effective for muscle strains and ligament/joint sprains. For fractures and chronic pain, a doctor might suggest <a href="https://www.orlincohen.com/orthopedic-specialties/physical-occupational-therapy/" data-uw-rm-brl="false">physical therapy</a>, <a href="https://www.orlincohen.com/orthopedic-specialties/pain-management/" data-uw-rm-brl="false">pain management</a>, and, if necessary, surgery.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10447">
+										<div class="grid-item-inner" id="10447">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"If I do have surgery, can I retear my UCL? How do I prevent it?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10447);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10447);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“While very rare, re-tears do happen. To help prevent them, follow all postoperative instructions including physical therapy and formal return-to-sport program. Maintaining proper biomechanics and following things like pitch count guidelines also are crucial.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-10448">
+										<div class="grid-item-inner" id="10448">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"When can I throw again following UCL surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(10448);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(10448);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“You can start a formal interval throwing program around 4 months after a reconstruction, and around 10 weeks after a repair. For pitchers, the goal is to return to play in 9-18 months after reconstruction, or about 6-9 months after repair.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12041">
+										<div class="grid-item-inner" id="12041">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Is there anything I can do to prevent my UCL from tearing?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12041);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12041);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“UCL injury prevention can be quite successful. Avoiding overuse, monitoring and following pitch-count guidelines, and maintaining arm, shoulder, and hip flexibility can help limit the risk of injury. The thrower’s 10-exercise program is a mainstay of UCL injury prevention.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12042">
+										<div class="grid-item-inner" id="12042">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Are there different types of UCL surgeries?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12042);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12042);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The surgical options are repair with an internal brace or UCL reconstruction—aka Tommy John surgery. In reconstruction, we drill tunnels into the elbow to replace and support the ligament with the graft. In a repair, the ligament is stitched and supported by an internal brace made of a tape suture.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12043">
+										<div class="grid-item-inner" id="12043">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What does your ulnar collateral ligament – or UCL – do?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12043);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12043);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“The UCL stabilizes the inside of the elbow. It sees significant stress with overhead activities, such as pitching a baseball or throwing a javelin. While most UCL tears are due to overuse and are quite common in throwers, they also can happen traumatically.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12044">
+										<div class="grid-item-inner" id="12044">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"If I tear my UCL, do I need to have surgery?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12044);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="408" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2019/10/Paci_James.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/" target="_blank" data-uw-rm-brl="false" aria-label="James Paci, M.D. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/james-paci-m-d/$jamespaci,m.d."><p class="doc-name">James Paci, M.D.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12044);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“While surgical repair or reconstruction is an option, most UCL injuries do not require surgery. Some partial UCL tears may heal without surgery. Platelet-rich plasma, or PRP injections, may help the non-operative healing process.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- SPORTS MED ACCORDION -->
+		
+		<!-- ACCUPUNCTURE THERAPY ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon icon-type2 accup-icon" src="/wp-content/uploads/2023/04/AccordionImg_Acupuncture@2x.png" alt="icon" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Acupuncture 
+						</h2>
+						<p>
+							Ease pain and restore wellness, naturally
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12008">
+										<div class="grid-item-inner" id="12008">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is acupuncture?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12008);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7325" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2021/12/Barry_Rubin.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/" target="_blank" data-uw-rm-brl="false" aria-label="Barry Rubin, M.D., F.A.A.P.M.R. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/$barryrubin,m.d.,f.a.a.p.m.r."><p class="doc-name">Barry Rubin, M.D., F.A.A.P.M.R.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12008);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Acupuncture is a traditional Chinese practice where thin needles are placed at specific points throughout the body to relieve pain and restore wellness. Modern medical practitioners have begun adapting the practice to treat digestive, respiratory, neurological, and orthopedic conditions.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12009">
+										<div class="grid-item-inner" id="12009">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How does acupuncture work?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12009);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7325" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2021/12/Barry_Rubin.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/" target="_blank" data-uw-rm-brl="false" aria-label="Barry Rubin, M.D., F.A.A.P.M.R. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/$barryrubin,m.d.,f.a.a.p.m.r."><p class="doc-name">Barry Rubin, M.D., F.A.A.P.M.R.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12009);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Acupuncture balances the flow of energy – also known as chi or qi – through the pathways of your body. It’s believed that by inserting very thin needles at strategic points along your body’s pathways or meridians, practitioners can balance your energy flow for improvements to your overall health.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12010">
+										<div class="grid-item-inner" id="12010">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How is acupuncture being applied today?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12010);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7325" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2021/12/Barry_Rubin.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/" target="_blank" data-uw-rm-brl="false" aria-label="Barry Rubin, M.D., F.A.A.P.M.R. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/$barryrubin,m.d.,f.a.a.p.m.r."><p class="doc-name">Barry Rubin, M.D., F.A.A.P.M.R.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12010);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Practitioners view acupuncture points as sites to stimulate nerves, muscles, and tissue – offering orthopedic benefits and overall wellness. The biochemicals released from acupuncture trigger a response from the body’s pain receptors to promote natural healing.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12011">
+										<div class="grid-item-inner" id="12011">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Does acupuncture hurt?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12011);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7325" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2021/12/Barry_Rubin.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/" target="_blank" data-uw-rm-brl="false" aria-label="Barry Rubin, M.D., F.A.A.P.M.R. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/$barryrubin,m.d.,f.a.a.p.m.r."><p class="doc-name">Barry Rubin, M.D., F.A.A.P.M.R.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12011);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Acupuncture needles are very thin, so most people feel little or no pain. They typically experience a “chi sensation,” (dull aching, tingling, and pressure) which is normal. These feelings lessen over time, and generally, patients leave sessions feeling energized or relaxed.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12012">
+										<div class="grid-item-inner" id="12012">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Does insurance cover acupuncture?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12012);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7325" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2021/12/Barry_Rubin.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/" target="_blank" data-uw-rm-brl="false" aria-label="Barry Rubin, M.D., F.A.A.P.M.R. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/barry-rubin-m-d-f-a-a-p-m-r/$barryrubin,m.d.,f.a.a.p.m.r."><p class="doc-name">Barry Rubin, M.D., F.A.A.P.M.R.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12012);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Many insurance plans do cover acupuncture. At Orlin &amp; Cohen, our orthopedic acupuncture treatments are delivered by Dr. Barry Rubin, a board-certified physiatrist and certified acupuncturist licensed in New York State. <a href="https://www.orlincohen.com/insurance-coverage/" data-uw-rm-brl="false">Orlin &amp; Cohen accepts most major health insurance plans.</a>”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- ACCUPUNCTURE THERAPY ACCORDION -->
+
+		<!-- CLINICAL TRIALS ACCORDION -->
+		
+		<div class="specialist-question-section">
+			<div class="specialist-question-header">
+				
+				<img class="question-icon icon-type2" src="/wp-content/uploads/2023/04/AccordionImg_Medical@2x.png" alt="packaged goods" data-uw-rm-ima="ai">
+					<div class="icon-spacer"></div>
+					<div class="question-topic">
+						<h2>
+							Clinical Trials
+						</h2>
+						<p>
+							Pioneering new treatments
+						</p>
+					</div>
+					<button class="section-toggle">
+							+
+					</button>
+			</div>
+			<div class="specialist-question-body">
+				
+									<div class="grid-item" id="gid-12014">
+										<div class="grid-item-inner" id="12014">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is the purpose of a clinical trial?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12014);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12014);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Clinical trials help doctors and researchers learn more about how to prevent, detect, or treat diseases and conditions with the intent of improving care. The goal of clinical trials is to test the safety and efficacy of new treatments like drugs, surgeries, devices, and more.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12016">
+										<div class="grid-item-inner" id="12016">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What are the potential benefits of participating in a clinical trial?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12016);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12016);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Participating in a clinical trial can help patients and researchers. The benefits vary with each study. Patients can receive the newest treatments and provide insight into diseases or conditions and improve their quality of life. Healthy volunteers can also take part.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12017">
+										<div class="grid-item-inner" id="12017">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What are the potential risks or side effects of participating in a clinical trial?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12017);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12017);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Each clinical trial has its own risks or side effects. If you are asked to participate in a clinical trial, you should review these risks with your doctor. If you enroll, you will be closely monitored. Researchers take every measure to prioritize your safety and well-being.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12018">
+										<div class="grid-item-inner" id="12018">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"What is the duration of a clinical trial?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12018);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12018);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Clinical trials can last weeks or sometimes years. Prior to joining the study, your doctor will review the timeline with you including the start date, each visit requirement, and an anticipated end date.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12019">
+										<div class="grid-item-inner" id="12019">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"Can I withdraw from a clinical trial if I change my mind?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12019);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12019);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Participation in clinical trials is voluntary. You can change your mind at any time or choose not to participate at all. You might have to contact your study doctor by mail or other methods to let them know you no longer wish to continue in the trial.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12020">
+										<div class="grid-item-inner" id="12020">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How will my privacy and confidentiality be protected during the clinical trial?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12020);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12020);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“All clinical trials must adhere to federal and local ethical guidelines that are meant to protect your privacy, maintain confidentiality, and preserve the integrity of the study. You will have the ability to review an informed consent form that explains the study thoroughly.”</p>
+											</div>
+										</div>
+									</div>
+								
+									<div class="grid-item" id="gid-12021">
+										<div class="grid-item-inner" id="12021">
+											<div class="grid-item-front">
+												<div class="gq-wrap"><h2 class="grid-question">"How are clinical trials monitored?"</h2></div>
+												<button class="btn view-answer" onclick="viewCard(12021);" data-uw-rm-kbnav="click">View Answer</button>
+											</div>
+											<div class="grid-item-back">
+												<div class="grid-doc-info">
+													<div style="display: inline-flex; justify-content: center; align-items: center;">
+														<div class="pfp-wrap">
+															<img data-idd="7463" class="doc-pfp" src="https://www.orlincohen.com/wp-content/uploads/2022/01/Nadia_Baichoo.jpg" role="presentation" alt="" data-uw-rm-ima="un">
+														</div>
+														<a href="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/" target="_blank" data-uw-rm-brl="false" aria-label="Nadia Baichoo, M.A. - opens in new tab" data-uw-rm-ext-link="" uw-rm-external-link-id="https://www.orlincohen.com/orthopedic-doctors/nadia-baichoo/$nadiabaichoo,m.a."><p class="doc-name">Nadia Baichoo, M.A.</p></a>
+													</div>
+													<button class="close-card" onclick="closeCard(12021);" data-uw-rm-kbnav="click">✕</button>
+												</div>
+												<p class="grid-question">“Most clinical trials are approved and monitored by the Institutional Review Board (IRB); a committee of physicians, statisticians, and members of the community who ensure trials are ethical, risks are minimal relative to potential benefits, and participants are protected.”</p>
+											</div>
+										</div>
+									</div>
+											</div>
+		</div>
+		
+		<!-- CLINICAL TRIALS ACCORDION...-->
+		
+		
+	</div>
+	<div class="modal-bg" id="modal-bg"></div>
+</section>
